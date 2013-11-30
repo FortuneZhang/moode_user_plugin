@@ -7,8 +7,8 @@ MoodeUserPlugin::Engine.routes.draw do
     match "/verify_codes/batch" => 'verify_codes#batch', :via => :post
   end
 
-  match "/signin" => 'sessions#new'  
-  match "/signout" => 'sessions#destroy'  
+  get "/signin" => 'sessions#new'  
+  get "/signout" => 'sessions#destroy'  
   match "/signup" => 'register#new', :via => :get, :as => 'signup'
   match "/signup" => 'register#create', :via => :post
 
@@ -16,9 +16,9 @@ MoodeUserPlugin::Engine.routes.draw do
   match "/settings/edit" => 'settings#edit', :via => :get , :as => "edit_settings"
   match "/settings" => 'settings#update', :via => :put, :as => "update_settings"
 
-  match "/phone/:phone/vcode" => 'verify_codes#send_vcode'
+  post "/phone/:phone/vcode" => 'verify_codes#send_vcode'
 
-  match "/p/:token" => 'sessions#create_with_token'  
+  post "/p/:token" => 'sessions#create_with_token'  
 
   scope '/api' do
     scope '/v1' do
